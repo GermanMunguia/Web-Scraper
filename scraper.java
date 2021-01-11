@@ -44,7 +44,6 @@ public class scraper {
 	        
 	      }
 
-	    //return str; 
 	      
 	}
 }
