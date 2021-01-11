@@ -6,7 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class scraper {
-	public static String[][] main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
 		
 		String[][] str = new String[50][4];  
 	     
@@ -47,7 +47,7 @@ public class scraper {
 	        
 	      }
 
-	    return str; 
+	
 	      
 	}
 }
