@@ -54,13 +54,14 @@ public class Movie {
 			 }
 			 
 			 
-			 //everything else is a description until the "Director:" token is found
+			 //everything else is a description until the "Director:" or the plural form of the token is found
 			 String currentToken = str.nextToken(); 
-			 if(currentToken.equals("Director:")) {
-				 return; 
+			 if(currentToken.equals("Director:") || currentToken.equals("Directors:")) {
+				 this.summary = des.substring(1); 
+				 //return; 
 			 } 
 			 
-			 
+			 des = des + " " +  currentToken; 
 			 
 			 System.out.println( " '"+currentToken+"'" );
 		}

@@ -19,6 +19,7 @@ public class Scraper {
 		 System.out.println( "\"" + someMovie.getMPAA() + "\" was the MPAA rating" ); 
 		 System.out.println( "\"" + someMovie.getLength() + "\" is the length in minutes" );
 		 System.out.println( "\"" + someMovie.getGenre() + "\" are the genre(s)" ); 
+		 System.out.println( "\"" + someMovie.getSummary() + "\" was the summary" ); 
 		 
 	}
 	
