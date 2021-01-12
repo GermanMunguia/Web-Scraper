@@ -1,5 +1,7 @@
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,7 +16,9 @@ public class Scraper {
 		 System.out.println( "\"" + someMovie.getName() + "\" was the name" ); 
 		 System.out.println( "\"" + someMovie.getYear() + "\" was the year" ); 
 		 System.out.println( "\"" + someMovie.getRating() + "\" was the rating" ); 
-		
+		 System.out.println( "\"" + someMovie.getMPAA() + "\" was the MPAA rating" ); 
+		 System.out.println( "\"" + someMovie.getLength() + "\" is the length in minutes" );
+		 System.out.println( "\"" + someMovie.getGenre() + "\" are the genre(s)" ); 
 		 
 	}
 	
