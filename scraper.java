@@ -7,6 +7,12 @@ import org.jsoup.select.Elements;
 import java.io.File;
 
 public class Scraper {
+	
+	public static void populate() {
+		
+		
+	}
+	
 	public static void main(String[] args) throws IOException {
 
 		String[][] str = new String[50][4];
