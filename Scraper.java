@@ -8,9 +8,14 @@ import java.io.File;
 
 public class Scraper {
 	
-	public static void populate() {
+	public static void populate(String[][] str) {
 		
+		 Movie someMovie = new Movie(str[0][0], str[0][1], str[0][2], str[0][3]);  
+		 System.out.println( "\"" + someMovie.getName() + "\" was the name" ); 
+		 System.out.println( "\"" + someMovie.getYear() + "\" was the year" ); 
+		 System.out.println( "\"" + someMovie.getRating() + "\" was the rating" ); 
 		
+		 
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -19,7 +24,7 @@ public class Scraper {
 
 		Document document = Jsoup.connect("https://www.imdb.com/search/title/?groups=top_250&sort=user_rating").get();
 
-		// The website title
+		// The web site title
 		System.out.println("Title: " + document.title());
 
 		// Get the element from the document
@@ -50,5 +55,7 @@ public class Scraper {
 
 		}
 
+		populate(str); 
+		
 	}
 }
