@@ -24,7 +24,7 @@ public class scraper {
 		for (Element movie : movies) {
 
 			// Extract the title, year, rating, and the description
-			String movieDes = movie.getElementsByTag("p").text();
+			String movieDescription = movie.getElementsByTag("p").text();
 			String movieYear = movie.getElementsByClass("lister-item-year text-muted unbold").text();
 			String movieRating = movie.getElementsByTag("strong").text();
 			String movieTitle = movie.getElementsByAttributeValueStarting("href", "/title/").text();
@@ -33,13 +33,13 @@ public class scraper {
 			System.out.println(movieTitle);
 			System.out.println(movieYear);
 			System.out.println(movieRating);
-			System.out.println(movieDes + "\n");
+			System.out.println(movieDescription + "\n");
 
 			// add it to the 2d array
 			str[counter][0] = movieTitle;
 			str[counter][1] = movieYear;
 			str[counter][2] = movieRating;
-			str[counter][3] = movieDes;
+			str[counter][3] = movieDescription;
 			counter++;
 
 		}
