@@ -11,6 +11,8 @@ public class Movie {
 	private ArrayList<String> genre; 
 	private String summary; 
 	
+	private boolean handler; //Will be used to flag a movie if it meets the requirements of a search. 
+	
 	//constructor
 	public Movie(String movieTitle, String movieYear, String movieRating, String movieDescription ) {
 		this.title = movieTitle.substring(0, movieTitle.length() - 2); //remove the extra 2 chars that were scraped
@@ -18,7 +20,8 @@ public class Movie {
 		this.rating = Double.parseDouble(movieRating);
 		length = -1; 
 		
-		populate(movieDescription); 
+		populate(movieDescription);
+		this.handler = true; 
 		
 	}
 	
@@ -114,7 +117,15 @@ public class Movie {
 	public String getSummary() {
 		return summary; 
 	}
+	
 
-
+	public Boolean getHandler() {
+		return handler; 
+	}
+	
+	//will change the handler to the specified boolean value
+	public void setHandler(Boolean value) {
+		handler = value; 
+	}
 	
 }
