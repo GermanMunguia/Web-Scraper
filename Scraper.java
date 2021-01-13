@@ -11,20 +11,17 @@ import java.io.File;
 public class Scraper {
 	
 	public static void populate(String[][] str) {
-		
-		 Movie someMovie = new Movie(str[0][0], str[0][1], str[0][2], str[0][3]);  
-		 System.out.println( "\"" + someMovie.getName() + "\" was the name" ); 
-		 System.out.println( "\"" + someMovie.getYear() + "\" was the year" ); 
-		 System.out.println( "\"" + someMovie.getRating() + "\" was the rating" ); 
-		 System.out.println( "\"" + someMovie.getMPAA() + "\" was the MPAA rating" ); 
-		 System.out.println( "\"" + someMovie.getLength() + "\" is the length in minutes" );
-		 System.out.println( "\"" + someMovie.getGenre() + "\" are the genre(s)" ); 
-		 System.out.println( "\"" + someMovie.getSummary() + "\" was the summary" ); 
 		 
+		//create the app that will handle of the movie list related functions.
+		App movies = new App(str); 
+		
+		movies.printMovies(50);
+		
 	}
 	
 	public static void main(String[] args) throws IOException {
 
+		//Four Strings are scraped for each of the Top 50 movies. 
 		String[][] str = new String[50][4];
 
 		Document document = Jsoup.connect("https://www.imdb.com/search/title/?groups=top_250&sort=user_rating").get();
@@ -32,7 +29,7 @@ public class Scraper {
 		// The web site title
 		System.out.println("Title: " + document.title());
 
-		// Get the element from the document
+		//Get the element from the item document
 		Elements movies = document.getElementsByClass("lister-item-content");
 
 		int counter = 0;
@@ -45,7 +42,7 @@ public class Scraper {
 			String movieRating = movie.getElementsByTag("strong").text();
 			String movieTitle = movie.getElementsByAttributeValueStarting("href", "/title/").text();
 
-			// Print
+			//Print for tests
 			System.out.println(movieTitle);
 			System.out.println(movieYear);
 			System.out.println(movieRating);

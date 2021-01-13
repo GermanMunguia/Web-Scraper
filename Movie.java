@@ -31,39 +31,59 @@ public class Movie {
 		
 		while(str.hasMoreTokens()) {
 			
+			 String currentToken = str.nextToken(); 
+			 //System.out.println( " '"+currentToken+"'" );
+			 
 			 //the first token will always be the MPAA rating. 
 			 if(MPAA == null) {
-				 this.MPAA = str.nextToken(); 
-				 str.nextToken(); //The second token will never be useful. 
+				 
+				 
+				 //The second token will never be useful unless, however when "Not Rated", neither will the third
+				 if(currentToken.equals("Not")) {
+					 str.nextToken(); str.nextToken();
+					 this.MPAA = "Not Rated"; 
+				 }
+				 
+				 else {
+					 this.MPAA = currentToken;
+					 str.nextToken();
+				 }
+				  
 			 }
 			 
 			 if(length == -1 ) {
 				 this.length = Integer.parseInt(str.nextToken()); 
 				 str.nextToken(); str.nextToken(); //The next two tokens will never be useful.
+				
+				 continue; 
 			 }
 			 
 			 //the following token will either be part of the genre, or summary, if it contains a comma, then the following token will also be genre, otherwise the summary begins.
 			 if(allGenres == false) {
-				 String currentGenre = str.nextToken(); 
-				 genre.add(currentGenre);
 				 
-				 if(!currentGenre.contains(",")) {
+				 if(!currentToken.contains(",")) {
+					 genre.add(currentToken);
 					 allGenres = true; 
 				 }
+				 
+				 else {
+					 genre.add(currentToken.substring(0, currentToken.length() -1 ));
+				 }
+				 
 				 continue; 
 			 }
 			 
 			 
 			 //everything else is a description until the "Director:" or the plural form of the token is found
-			 String currentToken = str.nextToken(); 
 			 if(currentToken.equals("Director:") || currentToken.equals("Directors:")) {
 				 this.summary = des.substring(1); 
-				 //return; 
+				 return; 
 			 } 
-			 
+			 //append the entire summary to the string. 
 			 des = des + " " +  currentToken; 
 			 
-			 System.out.println( " '"+currentToken+"'" );
+			 //print or make additions in terms of Votes/Director/Actor/Income
+		
 		}
 	}
 	
