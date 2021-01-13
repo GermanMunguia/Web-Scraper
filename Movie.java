@@ -25,6 +25,7 @@ public class Movie {
 		
 	}
 	
+	//format the input correctly since the scraped strings are not in proper form. 
 	public void populate(String Description) {
 		
 		StringTokenizer str = new StringTokenizer(Description); 
@@ -35,7 +36,6 @@ public class Movie {
 		while(str.hasMoreTokens()) {
 			
 			 String currentToken = str.nextToken(); 
-			 //System.out.println( " '"+currentToken+"'" );
 			 
 			 //the first token will always be the MPAA rating. 
 			 if(MPAA == null) {
@@ -75,7 +75,6 @@ public class Movie {
 				 
 				 continue; 
 			 }
-			 
 			 
 			 //everything else is a description until the "Director:" or the plural form of the token is found
 			 if(currentToken.equals("Director:") || currentToken.equals("Directors:")) {

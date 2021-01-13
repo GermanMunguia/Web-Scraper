@@ -28,11 +28,11 @@ public class App {
 			}
 			
 			System.out.print("Rank: " + (i+1) + " - \"" + movies[i].getName() + "\"" ); 
-			System.out.println( " - \"" + movies[i].getYear() + "\"" ); 
-			System.out.println( "\"" + movies[i].getRating() + "\" Rating" ); 
-			System.out.println( "\"" + movies[i].getMPAA() + "\" MPAA Rating" ); 
-			System.out.println( "\"" + movies[i].getLength() + "\" minutes long" );
-			System.out.println( "\"" + movies[i].getGenre() + "\" are the genre(s)" ); 
+			System.out.println( " | Year: " + movies[i].getYear()); 
+			System.out.println( "" + movies[i].getRating() + "/10.0 Rating" ); 
+			System.out.println( "MPAA Rating: \"" + movies[i].getMPAA() + "\"" ); 
+			System.out.println( "Runtime: " + movies[i].getLength() + " minutes" );
+			System.out.println( "Genre(s): " + movies[i].getGenre()); 
 			System.out.println( "\"" + movies[i].getSummary() + "\"\n" ); 
 			counter++; 
 		}
@@ -46,6 +46,7 @@ public class App {
 	
 	//The given input in guaranteed to be valid as it was already checked, if it matches the genre of a movie then set the handler to true, otherwise false. 
 	public void moviesWithGenre(String genre) {
+		
 		for(int i = 0; i < 50; i++) {
 			if(movies[i].getGenre().contains(genre)) {
 				movies[i].setHandler(true);
@@ -58,6 +59,21 @@ public class App {
 	
 	//If a movie has the same MPAA rating as the one given, the handler will become true which will allow for it to be printed
 	public void moviesWithMPAA(String MPAA) {
+		
+		//Since there are multiple types such as unrated/approved combine them all. 
+		if(MPAA.equals("Other")) {
+			for(int i = 0; i < 50; i++) {
+				if(movies[i].getMPAA().equals("R") || movies[i].getMPAA().equals("PG-13") || movies[i].getMPAA().equals("PG") || movies[i].getMPAA().equals("G")) {
+					movies[i].setHandler(false);
+				}
+				else {
+					movies[i].setHandler(true);
+				}
+			}
+			return; 
+		}
+		
+		//if its a typical rating: 
 		for(int i = 0; i < 50; i++) {
 			if(movies[i].getMPAA().equals(MPAA)) {
 				movies[i].setHandler(true);

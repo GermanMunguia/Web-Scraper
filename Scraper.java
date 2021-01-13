@@ -11,7 +11,7 @@ import java.io.File;
 
 public class Scraper {
 	
-	public static void populate(String[][] str) {
+	public static void run(String[][] str) {
 		 
 		//create the app that will handle of the movie list related functions.
 		App movies = new App(str); 
@@ -20,7 +20,7 @@ public class Scraper {
 		while(true) {
 			
 			System.out.println("IMDB Top 50 List - Type an option:");
-			System.out.println("(1) Print Entire List (2) Filter by Rank (3) Filter by Rating (4) Filter by Genre (5) Filter by MPPA Rating (6) Filter by Time Length (7) Exit");
+			System.out.println("(1) Print Entire List (2) Filter by Rank (3) Filter by Rating (4) Filter by Genre (5) Filter by MPPA Rating (6) Filter by Time Length (ELSE) Exit");
 			Scanner sc = new Scanner(System.in);
 			String choice = sc.nextLine(); 
 			
@@ -72,19 +72,61 @@ public class Scraper {
 				}
 			}
 			
+			//filter by one of the given genres. More are available however only 10 are implemented as searches. 
 			else if(choice.equals("4")) {
-				System.out.println("Choose a Genre to Filter By (1) ");
+				System.out.println("Choose a Popular Genre to Filter By (1) Action (2) Adventure (3) Animation (4) Biography (5) Comedy "
+						+ "(6) Crime (7) Drama (8) Horror (9) Sci-Fi (10) Thriller (Else) Exit");
+				choice = sc.nextLine();
+				
+				//All of options compact. 
+				if(choice.equals("1")) { movies.moviesWithGenre("Action");} else if(choice.equals("2")) { movies.moviesWithGenre("Adventure");} 
+				else if(choice.equals("3")) { movies.moviesWithGenre("Animation");} else if(choice.equals("4")) { movies.moviesWithGenre("Biography");}
+				else if(choice.equals("5")) { movies.moviesWithGenre("Comedy");} else if(choice.equals("6")) { movies.moviesWithGenre("Crime");}
+				else if(choice.equals("7")) { movies.moviesWithGenre("Drama");} else if(choice.equals("8")) { movies.moviesWithGenre("Horror");}
+				else if(choice.equals("9")) { movies.moviesWithGenre("Sci-Fi");} else if(choice.equals("10")) { movies.moviesWithGenre("Thriller");}
+		
+				else {
+					break; 
+				}
+				//print with the genre filter. 
+				movies.printMovies(50);
 			}
 			
+			//Filter by MPAA Rating. Some are not Rated 
 			else if(choice.equals("5")) {
+				
+				System.out.println("Choose the MPAA Rating to Filter By (1) Rated R (2) Rated PG-13 (3) Rated PG (4) Rated G (5) UnRated/Other (ELSE) Exit");
+				choice = sc.nextLine();
+				if(choice.equals("1")) { movies.moviesWithMPAA("R"); } else if(choice.equals("2")) { movies.moviesWithMPAA("PG-13"); }
+				else if(choice.equals("3")) { movies.moviesWithMPAA("PG"); } else if(choice.equals("4")) { movies.moviesWithMPAA("G"); }
+				else if(choice.equals("5")) { movies.moviesWithMPAA("Other"); }
+				
+				else {
+					break; 
+				}
+				
 				movies.printMovies(50);
 			}
 			
+			//filter by time that is shorter or equal to the given. 
 			else if(choice.equals("6")) {
-				movies.printMovies(50);
-			}
-			
-			else if(choice.equals("7")) {
+				
+				System.out.println("Type the Maximum Numbers of Minutes to Filter By (60-400)");
+				choice = sc.nextLine();
+				
+				//make sure its numerical before parsing
+				if(isNumerical(choice) == false) {
+					break; 
+				}
+				
+				int minutes = Integer.parseInt(choice); 
+				if(minutes <= 400 && minutes >= 60 ) {
+					movies.moviesShorterThanLength(minutes);
+				}
+				else {
+					break; 
+				}
+				
 				movies.printMovies(50);
 			}
 			
@@ -105,15 +147,11 @@ public class Scraper {
 			
 		}
 		
-		//movies.moviesWithMPAA("PG-13");
-		//movies.moviesFromYear(1956, 0);
-		//movies.moviesShorterThanLength(90);
-		//movies.moviesWithGenre("Drama");
-		//movies.moviesRatedHigher((double)8.5);
-		//movies.printMovies(10);
+		System.out.println("Exited.");
 		
 	}
 	
+	//will return true is a string is a numerical value that can be parsed. 
 	public static boolean isNumerical (String choice) { 
 		try {  
 			Double.parseDouble(choice);  
@@ -147,12 +185,6 @@ public class Scraper {
 			String movieRating = movie.getElementsByTag("strong").text();
 			String movieTitle = movie.getElementsByAttributeValueStarting("href", "/title/").text();
 
-			//Print for tests
-//			System.out.println(movieTitle);
-//			System.out.println(movieYear);
-//			System.out.println(movieRating);
-//			System.out.println(movieDescription + "\n");
-
 			// add it to the 2d array
 			str[counter][0] = movieTitle;
 			str[counter][1] = movieYear;
@@ -162,7 +194,8 @@ public class Scraper {
 
 		}
 
-		populate(str); 
+		//begin
+		run(str); 
 		
 	}
 }
