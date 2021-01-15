@@ -169,8 +169,6 @@ public class Scraper {
 
 		Document document = Jsoup.connect("https://www.imdb.com/search/title/?groups=top_250&sort=user_rating").get();
 
-		// The web site title
-		//System.out.println("Title: " + document.title());
 
 		//Get the element from the item document
 		Elements movies = document.getElementsByClass("lister-item-content");
